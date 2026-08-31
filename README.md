@@ -76,6 +76,11 @@ seasonal spread. Holding longer earns more spread but pays more rent, and the op
 in early winter — buy September, sell December, about $823K, with a break-even storage fee
 near $212K/month. Built from the JPMorgan Forage brief and extended well past it.
 
+## Bond fund outflows — research assistant
+
+Research assistant to Prof. Gunsu Son. Authorship has not been determined; no code, data or
+results from this work are published here.
+
 ---
 
 ## Contact
