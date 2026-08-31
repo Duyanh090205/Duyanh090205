@@ -53,7 +53,7 @@ original host and its SSO bridge, contributed by teammates.
 
 ## [Pairs Trading Engine](https://github.com/Duyanh090205/Pairs-Trading-Engine-Backtest) — a strategy I killed
 
-Six weeks building a statistical arbitrage pipeline, then finding it didn't work. The result
+Three months building a statistical arbitrage pipeline, then finding it didn't work. The result
 is negative. That is the point of the project.
 
 - **Zero pairs survived** the full filter funnel over 12 months of 2022 data — an all-pairs
