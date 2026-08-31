@@ -37,7 +37,8 @@ accepting a marginal winner. Nothing was ever tuned on market prices.
 
 ## [Prediction-Market Exchange](https://github.com/Duyanh090205/prediction-market-exchange)
 
-A working exchange, built from the matching engine up — not a simulation of one.
+A working exchange, built from the matching engine up — not a simulation of one. Built as
+the engine for a private trading game; it has not been opened to outside users.
 
 - **Central limit order book** with price–time priority, LIMIT and MARKET orders, atomic
   multi-level sweeps, `SELECT FOR UPDATE` locking so concurrent fills cannot double-spend a quote
@@ -51,7 +52,7 @@ I designed and built the matching engine, margin engine and settlement layer —
 trading core, and 88% of the codebase. The remainder is deployment configuration for the
 original host and its SSO bridge, contributed by teammates.
 
-## [Pairs Trading Engine](https://github.com/Duyanh090205/Pairs-Trading-Engine-Backtest) — a strategy I killed
+## [Pairs Trading Engine](https://github.com/Duyanh090205/pairs-trading-engine) — a strategy I killed
 
 Three months building a statistical arbitrage pipeline, then finding it didn't work. The result
 is negative. That is the point of the project.
