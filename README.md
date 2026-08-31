@@ -1,8 +1,5 @@
 # Duy Anh Nguyen
 
-Quantitative research — probabilistic modeling, market microstructure, and the unglamorous
-half of the job: proving a backtest isn't lying to you.
-
 Undergraduate at the University of South Florida. Applying for 2027 quantitative researcher
 and trader roles.
 
