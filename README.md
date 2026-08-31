@@ -1,97 +1,80 @@
 # Duy Anh Nguyen
 
-Quantitative research — probabilistic modelling, market microstructure, and the
-unglamorous half of the job: proving a backtest isn't lying to you.
+Quantitative research — probabilistic modeling, market microstructure, and the unglamorous
+half of the job: proving a backtest isn't lying to you.
 
-Undergraduate at the University of South Florida. Applying for 2027 quantitative
-researcher and trader roles.
+Undergraduate at the University of South Florida. Applying for 2027 quantitative researcher
+and trader roles.
+
+### **→ [Full case studies with the numbers behind them](https://github.com/Duyanh090205/portfolio)**
 
 ---
 
-## Selected work
+## [WC2026 Monte Carlo](https://github.com/Duyanh090205/wc2026-monte-carlo) — the locked pre-tournament top four were the exact four semifinalists
 
-### WC2026 Monte Carlo — an outright pricing model, locked before kickoff
+A tournament simulator that prices outright (champion) markets, then tracked itself against
+Polymarket and Kalshi for all 41 days of the World Cup.
 
-A tournament simulator that prices outright (champion) markets, then tracked itself
-against Polymarket and Kalshi for the full 41 days of the World Cup.
-
-The model was **locked on 10 June 2026, before the first match**, and never re-fitted
-during the tournament — the daily rerun re-conditions on locked results only. Every
-number below is out-of-sample.
+The model was **locked on 10 June 2026, before the first match**, and never re-fitted — the
+daily rerun re-conditions on locked results only. Every number below is out-of-sample.
 
 |  | Model | Polymarket | Outcome |
 |---|---|---|---|
 | Spain to win | **19.11%** | 16.45% | Spain won |
 | Top 4 by semifinal probability | Spain · France · England · Argentina | — | **all four reached the semifinals** |
 
-- **25 of 31 knockout ties called correctly (80.6%)** — two-way Brier **0.156** against a
-  0.25 coin-flip baseline
-- The model was more confident than the market on *all four* correct semifinalists
-  (43.9% vs 40.0%, 39.6% vs 37.3%, 34.5% vs 31.0%, 32.0% vs 27.4%) — the edge was
-  directional, not one lucky team
+- **25 of 31 knockout ties called correctly (80.6%)** — two-way Brier score, the mean squared
+  error of probability forecasts, of **0.156** against a 0.25 coin-flip baseline
+- More confident than the de-vigged market on *all four* correct semifinalists
+  (43.9 vs 40.0, 39.6 vs 37.3, 34.5 vs 31.0, 32.0 vs 27.4) — the edge was directional across
+  the top of the book, not one lucky team
 - Five of the six knockout misses sat in the 50–64% band. No high-confidence blow-ups.
-- 1,000,000 simulations per day, 41 consecutive days, run unattended in CI
+- 1,000,000 simulations per day, 41 consecutive days, unattended in CI. 282 tests.
 
-Group stage, for completeness: 63.9% W/D/L hit rate, multiclass Brier 0.514 against a
-1/3-each ignorance baseline of 0.667. That baseline is a sanity check, not a benchmark —
-the knockout figures above are the ones worth reading.
+Sole author of the simulator. Parameters selected by leave-one-tournament-out
+cross-validation across 12 historical tournaments, with a two-standard-error guard against
+accepting a marginal winner. Nothing was ever tuned on market prices.
 
-Python · NumPy · Elo reconstruction + squad market value · Poisson goal grid ·
-leave-one-tournament-out CV across 12 tournaments
-
----
-
-### [Prediction-Market Exchange](https://github.com/Duyanh090205/prediction-market-exchange)
+## [Prediction-Market Exchange](https://github.com/Duyanh090205/prediction-market-exchange)
 
 A working exchange, built from the matching engine up — not a simulation of one.
 
-- **Central limit order book** with price–time priority, LIMIT and MARKET orders,
-  atomic multi-level sweeps
-- **Margin engine** that reserves against worst-case loss, checked twice: once when an
-  order is submitted, again at execution
-- **Atomic settlement** — positions, balances and P&L move in a single transaction or
-  not at all
-- UUIDv7 idempotency keys, CSRF protection, rate limiting, structured logging
-- **103 unit tests** across matching, margin and P&L
-- ~15.6k lines: Next.js 15, PostgreSQL, Prisma, Socket.IO over a custom Node server
+- **Central limit order book** with price–time priority, LIMIT and MARKET orders, atomic
+  multi-level sweeps, `SELECT FOR UPDATE` locking so concurrent fills cannot double-spend a quote
+- **Margin engine** reserving against worst-case aggregate P&L, swept across the whole strike
+  ladder, and checked twice — once at submission, again inside the execution transaction,
+  because the first check is stale by the time it matters
+- **Atomic settlement** — positions, balances and P&L move in one transaction or not at all
+- **103 unit tests**, ~15.6k lines: Next.js 15, PostgreSQL, Prisma, Socket.IO
 
-I designed and built the matching engine, margin engine and settlement layer — 88% of
-the codebase. Deployment configuration and the SSO integration were contributed by
-teammates.
+I designed and built the matching engine, margin engine and settlement layer — the entire
+trading core, and 88% of the codebase. The remainder is deployment configuration for the
+original host and its SSO bridge, contributed by teammates.
 
----
+## [Pairs Trading Engine](https://github.com/Duyanh090205/Pairs-Trading-Engine-Backtest) — a strategy I killed
 
-### [Pairs Trading Engine](https://github.com/Duyanh090205/Pairs-Trading-Engine-Backtest) — a strategy I killed
+Six weeks building a statistical arbitrage pipeline, then finding it didn't work. The result
+is negative. That is the point of the project.
 
-Six weeks building an institutional-grade statistical arbitrage pipeline, and then
-finding it didn't work. The result is negative. That is the point of the project.
+- **Zero pairs survived** the full filter funnel over 12 months of 2022 data — an all-pairs
+  cointegration scan across the S&P 500 with Benjamini–Hochberg correction. Roughly 125,000
+  hypothesis tests; correcting for that honestly leaves nothing
+- Static OLS hedge ratios drift **25.5%** in a year, so hedge ratios come from a 2-D Kalman filter
+- **Four classes of look-ahead bias injected into 20 deliberately corrupted datasets** to
+  measure how much each inflates Sharpe. Full-dataset normalization leakage is the dangerous
+  one: it inflates only moderately, which is exactly what makes it near-undetectable
+- 45-fold monthly walk-forward validation, 2022–2026, defended across bull and bear regimes
 
-- Engle–Granger and Johansen cointegration scans across the S&P 500 with
-  Benjamini–Hochberg FDR correction — **zero pairs survived the full filter funnel**
-  over 12 months of 2022 data
-- Static OLS hedge ratios drift **25.5%** over a year, so hedge ratios are estimated
-  with a 2-D Kalman filter instead
-- **Deliberately injected four classes of look-ahead bias into 20 corrupted datasets**
-  to measure how much each inflates Sharpe. Full-dataset normalisation leakage is the
-  dangerous one: it inflates moderately and is close to undetectable from the data
-  file alone
-- 45-fold monthly walk-forward validation, 2022–2026, defended across bull and bear
-  regimes with one-at-a-time sensitivity analysis
+## [Natural-Gas Storage Pricing](https://github.com/Duyanh090205/natgas-storage-pricing)
 
-Numba · Kalman filtering · microstructure-aware cost modelling · paper-trading deployment
+Harmonic regression on a gas price curve feeding a storage-contract pricer. Out-of-sample
+walk-forward, it beats SARIMA and both naive benchmarks on every metric — MAE 0.179 against
+0.253 for SARIMA and 0.574 for seasonal naive, the only baseline that counts.
 
----
-
-### Natural-gas storage pricing
-
-Harmonic regression on natural-gas forward curves (K=3 chosen by AIC) with closed-form
-prediction intervals, feeding a seasonal storage-contract pricer. Extended well past the
-original brief with credit-risk and FICO-bucketing work.
-
-### Bond fund outflows — research assistant
-
-Research assistant to Prof. Gunsu Son. Authorship has not been determined; no code, data
-or results from this work are published here.
+The result worth reading is the pricing one: the optimal storage trade is **not** the widest
+seasonal spread. Holding longer earns more spread but pays more rent, and the optimum lands
+in early winter — buy September, sell December, about $823K, with a break-even storage fee
+near $212K/month. Built from the JPMorgan Forage brief and extended well past it.
 
 ---
 
