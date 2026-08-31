@@ -77,10 +77,24 @@ seasonal spread. Holding longer earns more spread but pays more rent, and the op
 in early winter — buy September, sell December, about $823K, with a break-even storage fee
 near $212K/month. Built from the JPMorgan Forage brief and extended well past it.
 
-## Bond fund outflows — research assistant
+## Bond fund flow-performance research — research assistant
 
-Research assistant to Prof. Gunsu Son. Authorship has not been determined; no code, data or
-results from this work are published here.
+Research assistant to Prof. Gunsu Son, University of South Florida, since October 2025.
+Authorship has not been determined. No code, data, figures or results from this work are
+published here.
+
+The work: building a panel from CRSP mutual fund share-class data — 10M+ raw records
+reduced to a 400K+ bond fund-month panel (1992–2014) and a 1.2M-observation equity panel —
+and replicating Goldstein, Jiang & Ng (2017, *JFE*) Table 2 on it, reproducing the
+published specification to adj. R² 0.066 against the paper's 0.065, with Stata cross-checks.
+
+From there, the same relationship estimated with a ladder of methods on identical
+chronological splits: hinge OLS, a Robinson partially linear model (Numba-JIT local-linear
+kernel, Fan–Gijbels bandwidth), a partial-linear neural network in Keras, and 17 AutoML
+models (Optuna GBMs, AutoGluon, H2O, EBM). Alongside it, a data-quality audit of extreme
+observations, machine-precision regression guards (Δ ≈ 1e-16), and a pytest suite.
+
+Findings are with my advisor and are not described here.
 
 ---
 
