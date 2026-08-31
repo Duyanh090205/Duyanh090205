@@ -29,7 +29,7 @@ daily rerun re-conditions on locked results only. Every number below is out-of-s
   (43.9 vs 40.0, 39.6 vs 37.3, 34.5 vs 31.0, 32.0 vs 27.4) — the edge was directional across
   the top of the book, not one lucky team
 - Five of the six knockout misses sat in the 50–64% band. No high-confidence blow-ups.
-- 1,000,000 simulations per day, 41 consecutive days, unattended in CI. 282 tests.
+- 1,000,000 simulations per day, 41 consecutive days, unattended in CI. 384 tests.
 
 Sole author of the simulator. Parameters selected by leave-one-tournament-out
 cross-validation across 12 historical tournaments, with a two-standard-error guard against
