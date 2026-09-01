@@ -44,7 +44,8 @@ complete and tested, but it has never taken live order flow.
   ladder, and checked twice — once at submission, again inside the execution transaction,
   because the first check is stale by the time it matters
 - **Atomic settlement** — positions, balances and P&L move in one transaction or not at all
-- **103 unit tests**, ~15.6k lines: Next.js 15, PostgreSQL, Prisma, Socket.IO
+- **103 tests** — 67 unit, plus 36 integration tests against a live Postgres. ~15.6k lines:
+  Next.js 15, PostgreSQL, Prisma, Socket.IO
 
 I designed and built the matching engine, margin engine and settlement layer — the entire
 trading core, and 88% of the codebase. The remainder is deployment configuration for the
