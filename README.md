@@ -34,9 +34,11 @@ accepting a marginal winner. Nothing was ever tuned on market prices.
 
 ## [Prediction-Market Exchange](https://github.com/Duyanh090205/prediction-market-exchange)
 
-A working exchange, built from the matching engine up — not a simulation of one. Built as
-the engine for a private trading game; the matching, margin and settlement paths are
-complete and tested, but it has never taken live order flow.
+A working exchange, built from the matching engine up — not a simulation of one.
+**[See the live order book](https://prediction-market-exchange.onrender.com)** — no account needed.
+
+Built as the engine for a private trading game; the matching, margin and settlement paths
+are complete and tested, but it has never taken live order flow.
 
 - **Central limit order book** with price–time priority, LIMIT and MARKET orders, atomic
   multi-level sweeps, `SELECT FOR UPDATE` locking so concurrent fills cannot double-spend a quote
