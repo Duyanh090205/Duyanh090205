@@ -36,6 +36,7 @@ accepting a marginal winner. Nothing was ever tuned on market prices.
 
 A working exchange, built from the matching engine up — not a simulation of one.
 **[See the live order book](https://prediction-market-exchange.onrender.com)** — no account needed.
+Guest: read-only market-data feed · Enter as demo trader: a sandbox with play money, expires in 24 h.
 
 Built as the engine for a private trading game; the matching, margin and settlement paths
 are complete and tested, but it has never taken live order flow.
